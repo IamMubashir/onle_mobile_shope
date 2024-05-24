@@ -3,3 +3,260 @@
 #include<string>
 #include<map>
 using namespace std;
+class mobileshope {
+    string item;
+    int price, quantity;
+    float rating;
+    vector<mobileshope> ve;
+    bool isAdminLoggedIn;
+    bool isUserLoggedIn;
+    map<string, string> userPasswords; // Store username-password pairs
+
+public:
+    mobileshope() {
+        isAdminLoggedIn = false;
+        isUserLoggedIn = false;
+    }
+
+    // Login as admin
+    void adminLogin() {
+        string username, password;
+        cout << "Enter admin username: ";
+        cin >> username;
+        cout << "Enter admin password: ";
+        cin >> password;
+        // Your authentication logic here, for simplicity, I'm using a hardcoded username and password
+        if (username == "admin" && password == "admin123") {
+            isAdminLoggedIn = true;
+            cout << "Admin login successful!" << endl;
+        } else {
+            cout << "Invalid username or password!" << endl;
+        }
+    }
+// Logout as admin
+    void adminLogout() {
+        isAdminLoggedIn = false;
+        cout << "Admin logged out successfully!" << endl;
+    }
+
+    // Login as user
+    void userLogin() {
+        string username, password;
+        cout << "Enter user username: ";
+        cin >> username;
+
+        // Check if the user is already registered
+        if (userPasswords.find(username) != userPasswords.end()) {
+            cout << "Enter user password: ";
+            cin >> password;
+            if (password == userPasswords[username]) {
+                isUserLoggedIn = true;
+                cout << "User login successful!" << endl;
+            } else {
+                cout << "Invalid password!" << endl;
+            }
+        } else {
+            cout << "User not registered. Please set your password." << endl;
+            cout << "Set your password: ";
+            cin >> password;
+            userPasswords[username] = password;
+            isUserLoggedIn = true;
+            cout << "User registered and logged in successfully!" << endl;
+        }
+    }
+
+    // Logout as user
+    void userLogout() {
+        isUserLoggedIn = false;
+        cout << "User logged out successfully!" << endl;
+    }
+// Adding new mobile
+    void add() {
+        if (!isAdminLoggedIn) {
+            cout << "You need to login as admin to perform this operation!" << endl;
+            return;
+        }
+
+        mobileshope Mobile;
+        int choice = 1; // Initialize choice
+        while (choice != 0 && choice == 1) {
+            cout << "Enter the Name of Mobile Brand: ";
+            cin >> Mobile.item;
+            cout << "Enter the Price of the Mobile: ";
+            cin >> Mobile.price;
+            cout << "Enter the Quantity of the Mobile: ";
+            cin >> Mobile.quantity;
+            Mobile.rating = 0; // Initialize rating
+            ve.push_back(Mobile);
+            cout << "----------------------------------"<<endl;
+            cout << " Mobile is added Successfully...! " << endl;
+            cout << "----------------------------------"<<endl;
+            cout << "Enter 1 to add more or 0 to exit: ";
+            cin >> choice;
+        }
+    }
+
+    // Displayed the product
+    void display() {
+        for(int i = 0; i < ve.size(); i++) {
+            cout << "Your Mobile is: " << ve[i].item << endl;
+            cout << "Your Mobile price is: " << ve[i].price << endl;
+            cout << "Quantity of the product: " << ve[i].quantity << endl;
+            cout << "Rating of the product: " << ve[i].rating << endl << endl;
+        }
+    }
+    // Deleting the product
+    void deleteitem() {
+        if (!isAdminLoggedIn) {
+            cout << "You need to login as admin to perform this operation!" << endl;
+            return;
+        }
+
+        string n;
+        cout << "Enter the name of the Item you want to delete: ";
+        cin >> n;
+        for (int i = 0; i < ve.size(); i++) {
+            if (n == ve[i].item) {
+                ve.erase(ve.begin() + i); // Correct index to erase
+                cout << "---------------------------------"<<endl;
+                cout << " Item is deleted Successfully..! "<< endl << endl;
+                cout << "---------------------------------"<<endl;
+            }
+        }
+    }
+// Search for a mobile by name
+    void search() {
+        string n;
+        cout << "Enter the name of the Mobile you want to search: ";
+        cin >> n;
+        bool found = false;
+        for (int i = 0; i < ve.size(); i++) {
+            if (n == ve[i].item) {
+                cout << "Mobile Found!" << endl;
+                cout << "Name: " << ve[i].item << endl;
+                cout << "Price: " << ve[i].price << endl;
+                cout << "Quantity: " << ve[i].quantity << endl;
+                cout << "Rating: " << ve[i].rating << endl << endl;
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            cout << "-------------------"<<endl;
+            cout << " Mobile not found! " << endl;
+            cout << "-------------------"<<endl;
+        }
+    }
+ // Edit product details (admin only)
+    void editProduct() {
+        if (!isAdminLoggedIn) {
+            cout << "You need to login as admin to perform this operation!" << endl;
+            return;
+        }
+
+        string n;
+        cout << "Enter the name of the product you want to edit: ";
+        cin >> n;
+        for (int i = 0; i < ve.size(); i++) {
+            if (n == ve[i].item) {
+                cout << "Enter new price for the product: ";
+                cin >> ve[i].price;
+                cout << "Enter new quantity for the product: ";
+                cin >> ve[i].quantity;
+                cout << "Product details updated successfully!" << endl;
+                return;
+            }
+        }
+        cout << "Product not found!" << endl;
+    }
+// User gives rating to a product
+    void giveRating() {
+        if (!isUserLoggedIn) {
+            cout << "You need to login as user to perform this operation!" << endl;
+            return;
+        }
+
+        string n;
+        cout << "Enter the name of the product you want to rate: ";
+        cin >> n;
+        for (int i = 0; i < ve.size(); i++) {
+            if (n == ve[i].item) {
+                float newRating;
+                cout << "Enter your rating for the product (0-5): ";
+                cin >> newRating;
+                if (newRating >= 0 && newRating <= 5) {
+                    ve[i].rating = (ve[i].rating + newRating) / 2; // Update rating
+                    cout << "Rating submitted successfully!" << endl;
+                } else {
+                    cout << "Invalid rating! Please enter a value between 0 and 5." << endl;
+                }
+                return;
+            }
+        }
+        cout << "Product not found!" << endl;
+    }
+};
+int main() {
+    mobileshope mobile;
+    int choice;
+    while(true) {
+        cout << endl;
+        cout << " ********** ONLINE MOBILE SHOP ********** " << endl << endl;
+        cout << "Press 1 for Login as Admin" << endl;
+        cout << "Press 2 for Logout as Admin" << endl;
+        cout << "Press 3 for Login as User" << endl;
+        cout << "Press 4 for Logout as User" << endl;
+        cout << "Press 5 for add new Mobile: " << endl;
+        cout << "Press 6 for display the list of Mobile details: " << endl;
+        cout << "Press 7 for deleting the Mobile from the list: " << endl;
+        cout << "Press 8 for searching a Mobile: " << endl;
+        cout << "Press 9 for editing a product: " << endl;
+        cout << "Press 10 for giving rating to a product: " << endl;
+        cout << "Press 0 to exit: " << endl;
+        cout << "Enter the Choice: ";
+        cin >> choice;
+
+        switch(choice) {
+            case 1:
+                mobile.adminLogin();
+                break;
+            case 2:
+                mobile.adminLogout();
+                break;
+            case 3:
+                mobile.userLogin();
+                break;
+            case 4:
+                mobile.userLogout();
+                break;
+            case 5:
+                mobile.add();
+                break;
+            case 6:
+                mobile.display();
+                break;
+            case 7:
+                mobile.deleteitem();
+                break;
+            case 8:
+                mobile.search();
+                break;
+            case 9:
+                mobile.editProduct();
+                break;
+            case 10:
+                mobile.giveRating();
+                break;
+            case 0:
+                cout <<endl<<endl;
+                cout << " ------------------------------------------------------------- "<<endl;
+                cout << "| We are working on it. More Features will be added soon....! |"<< endl;
+                cout << " ------------------------------------------------------------- "<<endl;
+                cout <<endl<<endl;
+                exit(0);
+            default:
+                cout << "!....Wrong key  please Enter the correct key(0-10)...!!" << endl;
+        }
+    }
+    return 0;
+}
