@@ -169,3 +169,30 @@ public:
         }
         cout << "Product not found!" << endl;
     }
+// User gives rating to a product
+    void giveRating() {
+        if (!isUserLoggedIn) {
+            cout << "You need to login as user to perform this operation!" << endl;
+            return;
+        }
+
+        string n;
+        cout << "Enter the name of the product you want to rate: ";
+        cin >> n;
+        for (int i = 0; i < ve.size(); i++) {
+            if (n == ve[i].item) {
+                float newRating;
+                cout << "Enter your rating for the product (0-5): ";
+                cin >> newRating;
+                if (newRating >= 0 && newRating <= 5) {
+                    ve[i].rating = (ve[i].rating + newRating) / 2; // Update rating
+                    cout << "Rating submitted successfully!" << endl;
+                } else {
+                    cout << "Invalid rating! Please enter a value between 0 and 5." << endl;
+                }
+                return;
+            }
+        }
+        cout << "Product not found!" << endl;
+    }
+};
