@@ -70,3 +70,28 @@ public:
         isUserLoggedIn = false;
         cout << "User logged out successfully!" << endl;
     }
+// Adding new mobile
+    void add() {
+        if (!isAdminLoggedIn) {
+            cout << "You need to login as admin to perform this operation!" << endl;
+            return;
+        }
+
+        mobileshope Mobile;
+        int choice = 1; // Initialize choice
+        while (choice != 0 && choice == 1) {
+            cout << "Enter the Name of Mobile Brand: ";
+            cin >> Mobile.item;
+            cout << "Enter the Price of the Mobile: ";
+            cin >> Mobile.price;
+            cout << "Enter the Quantity of the Mobile: ";
+            cin >> Mobile.quantity;
+            Mobile.rating = 0; // Initialize rating
+            ve.push_back(Mobile);
+            cout << "----------------------------------"<<endl;
+            cout << " Mobile is added Successfully...! " << endl;
+            cout << "----------------------------------"<<endl;
+            cout << "Enter 1 to add more or 0 to exit: ";
+            cin >> choice;
+        }
+    }
