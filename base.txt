@@ -3,3 +3,33 @@
 #include<string>
 #include<map>
 using namespace std;
+class mobileshope {
+    string item;
+    int price, quantity;
+    float rating;
+    vector<mobileshope> ve;
+    bool isAdminLoggedIn;
+    bool isUserLoggedIn;
+    map<string, string> userPasswords; // Store username-password pairs
+
+public:
+    mobileshope() {
+        isAdminLoggedIn = false;
+        isUserLoggedIn = false;
+    }
+
+    // Login as admin
+    void adminLogin() {
+        string username, password;
+        cout << "Enter admin username: ";
+        cin >> username;
+        cout << "Enter admin password: ";
+        cin >> password;
+        // Your authentication logic here, for simplicity, I'm using a hardcoded username and password
+        if (username == "admin" && password == "admin123") {
+            isAdminLoggedIn = true;
+            cout << "Admin login successful!" << endl;
+        } else {
+            cout << "Invalid username or password!" << endl;
+        }
+    }
