@@ -196,3 +196,67 @@ public:
         cout << "Product not found!" << endl;
     }
 };
+int main() {
+    mobileshope mobile;
+    int choice;
+    while(true) {
+        cout << endl;
+        cout << " ********** ONLINE MOBILE SHOP ********** " << endl << endl;
+        cout << "Press 1 for Login as Admin" << endl;
+        cout << "Press 2 for Logout as Admin" << endl;
+        cout << "Press 3 for Login as User" << endl;
+        cout << "Press 4 for Logout as User" << endl;
+        cout << "Press 5 for add new Mobile: " << endl;
+        cout << "Press 6 for display the list of Mobile details: " << endl;
+        cout << "Press 7 for deleting the Mobile from the list: " << endl;
+        cout << "Press 8 for searching a Mobile: " << endl;
+        cout << "Press 9 for editing a product: " << endl;
+        cout << "Press 10 for giving rating to a product: " << endl;
+        cout << "Press 0 to exit: " << endl;
+        cout << "Enter the Choice: ";
+        cin >> choice;
+
+        switch(choice) {
+            case 1:
+                mobile.adminLogin();
+                break;
+            case 2:
+                mobile.adminLogout();
+                break;
+            case 3:
+                mobile.userLogin();
+                break;
+            case 4:
+                mobile.userLogout();
+                break;
+            case 5:
+                mobile.add();
+                break;
+            case 6:
+                mobile.display();
+                break;
+            case 7:
+                mobile.deleteitem();
+                break;
+            case 8:
+                mobile.search();
+                break;
+            case 9:
+                mobile.editProduct();
+                break;
+            case 10:
+                mobile.giveRating();
+                break;
+            case 0:
+                cout <<endl<<endl;
+                cout << " ------------------------------------------------------------- "<<endl;
+                cout << "| We are working on it. More Features will be added soon....! |"<< endl;
+                cout << " ------------------------------------------------------------- "<<endl;
+                cout <<endl<<endl;
+                exit(0);
+            default:
+                cout << "!....Wrong key  please Enter the correct key(0-10)...!!" << endl;
+        }
+    }
+    return 0;
+}
