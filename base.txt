@@ -105,3 +105,22 @@ public:
             cout << "Rating of the product: " << ve[i].rating << endl << endl;
         }
     }
+    // Deleting the product
+    void deleteitem() {
+        if (!isAdminLoggedIn) {
+            cout << "You need to login as admin to perform this operation!" << endl;
+            return;
+        }
+
+        string n;
+        cout << "Enter the name of the Item you want to delete: ";
+        cin >> n;
+        for (int i = 0; i < ve.size(); i++) {
+            if (n == ve[i].item) {
+                ve.erase(ve.begin() + i); // Correct index to erase
+                cout << "---------------------------------"<<endl;
+                cout << " Item is deleted Successfully..! "<< endl << endl;
+                cout << "---------------------------------"<<endl;
+            }
+        }
+    }
