@@ -124,3 +124,26 @@ public:
             }
         }
     }
+// Search for a mobile by name
+    void search() {
+        string n;
+        cout << "Enter the name of the Mobile you want to search: ";
+        cin >> n;
+        bool found = false;
+        for (int i = 0; i < ve.size(); i++) {
+            if (n == ve[i].item) {
+                cout << "Mobile Found!" << endl;
+                cout << "Name: " << ve[i].item << endl;
+                cout << "Price: " << ve[i].price << endl;
+                cout << "Quantity: " << ve[i].quantity << endl;
+                cout << "Rating: " << ve[i].rating << endl << endl;
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            cout << "-------------------"<<endl;
+            cout << " Mobile not found! " << endl;
+            cout << "-------------------"<<endl;
+        }
+    }
