@@ -95,3 +95,13 @@ public:
             cin >> choice;
         }
     }
+
+    // Displayed the product
+    void display() {
+        for(int i = 0; i < ve.size(); i++) {
+            cout << "Your Mobile is: " << ve[i].item << endl;
+            cout << "Your Mobile price is: " << ve[i].price << endl;
+            cout << "Quantity of the product: " << ve[i].quantity << endl;
+            cout << "Rating of the product: " << ve[i].rating << endl << endl;
+        }
+    }
