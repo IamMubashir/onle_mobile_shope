@@ -33,3 +33,40 @@ public:
             cout << "Invalid username or password!" << endl;
         }
     }
+// Logout as admin
+    void adminLogout() {
+        isAdminLoggedIn = false;
+        cout << "Admin logged out successfully!" << endl;
+    }
+
+    // Login as user
+    void userLogin() {
+        string username, password;
+        cout << "Enter user username: ";
+        cin >> username;
+
+        // Check if the user is already registered
+        if (userPasswords.find(username) != userPasswords.end()) {
+            cout << "Enter user password: ";
+            cin >> password;
+            if (password == userPasswords[username]) {
+                isUserLoggedIn = true;
+                cout << "User login successful!" << endl;
+            } else {
+                cout << "Invalid password!" << endl;
+            }
+        } else {
+            cout << "User not registered. Please set your password." << endl;
+            cout << "Set your password: ";
+            cin >> password;
+            userPasswords[username] = password;
+            isUserLoggedIn = true;
+            cout << "User registered and logged in successfully!" << endl;
+        }
+    }
+
+    // Logout as user
+    void userLogout() {
+        isUserLoggedIn = false;
+        cout << "User logged out successfully!" << endl;
+    }
