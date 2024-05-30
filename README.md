@@ -1,5 +1,5 @@
 # onle_mobile_shope
-Certainly! Here's a template for your README file on GitHub:
+"master" branch is my baseline not "main":
 
 ---
 
